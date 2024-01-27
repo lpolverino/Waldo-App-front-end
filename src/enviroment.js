@@ -1,6 +1,8 @@
 
 const getBackEnd = () =>{
-    const backend = import.meta.env.VITE_BACKEND_URL ||"https://dandy-rhinestone-trader.glitch.me/api/" ;
+    //const backend = import.meta.env.VITE_BACKEND_URL ||"https://dandy-rhinestone-trader.glitch.me/api/" ;
+
+    const backend = "https://dandy-rhinestone-trader.glitch.me/api/";
 
     return backend
 }
