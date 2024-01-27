@@ -1,0 +1,13 @@
+@import "../../index.css";
+
+.app{
+    background-color: var(--waldo-blue);
+    color: white;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.main{
+    flex-grow: 1;
+}

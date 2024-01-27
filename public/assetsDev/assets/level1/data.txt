@@ -1,0 +1,4 @@
+evil waldo from x: 195 y :390 to x:220 y:450
+wizard from x:500 y:380 to x 545: y:445
+waldo from x:1165 y:415 to x:1215 y:485
+
