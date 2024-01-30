@@ -14,7 +14,6 @@
     justify-content: center;
     text-align: center;
     animation: apear 0.5s linear;
-    /*animation: fade-in-out 3s linear;*/
     font-size: 1.8rem;
 }
 
@@ -30,20 +29,4 @@
     100% {
         opacity: 1;
     }
-}
-
-@keyframes fade-in-out {
-    0%{
-        opacity: 0;
-    }
-    5%{
-        opacity: 1;
-    }
-    80%{
-        opacity: 1;
-    }
-    100%{
-        opacity: 0;
-    }
-
 }
