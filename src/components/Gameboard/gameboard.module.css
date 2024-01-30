@@ -13,12 +13,23 @@
     display: flex;
     justify-content: center;
     text-align: center;
-    animation: fade-in-out 3s linear;
+    animation: apear 0.5s linear;
+    /*animation: fade-in-out 3s linear;*/
     font-size: 1.8rem;
 }
 
 .messege p{
     align-self: center;
+}
+
+@keyframes apear {
+    0%{
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
 }
 
 @keyframes fade-in-out {

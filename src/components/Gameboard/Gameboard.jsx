@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import PopUpMenu from '../PopUpMenu/PopUpMenu';
 import {Backend} from '../Level/Level';
-import { useContext, useState} from 'react';
+import { useContext, useEffect, useState} from 'react';
 import styles from "./gameboard.module.css"
 
 
@@ -12,6 +12,13 @@ const Gameboard = ({ levelImg, mouse, setMouse, setCharacterFounded, levelDimens
     x:0,
     y:0,
   })
+
+  useEffect( () => {
+    const timeoutId = setTimeout( () => {
+      setMessege(null)
+    }, 2000)
+    return () => clearTimeout(timeoutId);
+  }, [messege])
 
   const {characters, url} = useContext(Backend)
 
@@ -59,12 +66,10 @@ const Gameboard = ({ levelImg, mouse, setMouse, setCharacterFounded, levelDimens
     console.log(`clicked on ${characterId}`);
     setMouse({pressed: false, intents: mouse.intents +1})
     const positionData = await sendPosition(characterId)
-    console.log(positionData.succed)
-    if (messege=== null){
+    /*if (messege === null){
       setTimeout(() =>{
         setMessege(null)
-      },3000)
-    }
+      },3000)*/
     setMessege(getResponseText(positionData.succed, characterId) )
     setCharacterFounded(characterId, positionData.succed)
   }

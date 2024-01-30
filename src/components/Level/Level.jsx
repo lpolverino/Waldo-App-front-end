@@ -96,7 +96,7 @@ const Level = () => {
         setError(err.message)
       }
       finally{
-        //setLoading(false)
+        setLoading(false)
       }
     }
     getData()
