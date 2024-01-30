@@ -14,6 +14,21 @@ export const Backend = createContext({
 })
 
 
+const Loading = () =>{
+  return (
+    <div className={styles.level_loading}>
+      <Header></Header>
+      <div className={styles.loading}>
+        <h2>
+          Loading Level (Computer finding waldo)
+        </h2>
+        <div className={styles.grid}><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      </div>
+      <Footer></Footer>
+    </div>
+  ) 
+}
+
 
 const Level = () => {
 
@@ -81,7 +96,7 @@ const Level = () => {
         setError(err.message)
       }
       finally{
-        setLoading(false)
+        //setLoading(false)
       }
     }
     getData()
@@ -117,13 +132,14 @@ const Level = () => {
                     }>
                 </Header>
             </div>
-              <Gameboard
-                levelImg={levelImg}
-                mouse={mouse}
-                setMouse={setMouse}
-                setCharacterFounded={setCharacterFounded}
-                levelDimensions= {levelDimensions}>
-              </Gameboard>
+                <Gameboard
+                  levelImg={levelImg}
+                  mouse={mouse}
+                  setMouse={setMouse}
+                  setCharacterFounded={setCharacterFounded}
+                  levelDimensions= {levelDimensions}>
+                </Gameboard>
+        
              {finished && <EndGamePanel score={calculateDifTimeWithStart(score)}></EndGamePanel>}
              <Footer></Footer>
           </div>
@@ -133,11 +149,11 @@ const Level = () => {
 
   if(error === null){
     return (<>
-      {loading
-        ?<h2>Loading</h2>
-        :createGame()
-      }
-    </>
+        {loading 
+          ? <Loading></Loading>
+          :createGame()
+        }
+      </>
     )
   }else{
     return <ErrorPage></ErrorPage>

@@ -31,6 +31,18 @@ const createErrorMessage = (error) =>{
   )
 }
 
+const LoadPanel = () =>{
+
+  return (
+    <div className={styles.loading}>
+      <h2>
+        Getting Levels
+      </h2>
+      <div className={styles.grid}><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+    </div>
+  ) 
+}
+
 const LevelSelector = ({url}) => {
   const backendUrl = url + "level"
 
@@ -66,7 +78,10 @@ const LevelSelector = ({url}) => {
   return (
     <div>
       {error && createErrorMessage(error)}
-     {!loading && createDisplayer(levels)}
+      {loading
+        ? <LoadPanel></LoadPanel>
+        :createDisplayer(levels)
+      }
     </div>
   )
 }
