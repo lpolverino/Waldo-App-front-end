@@ -6,4 +6,4 @@ It was developed in ReactJs and was a cool project with many difficulties, how t
 Simply clone the project and type in your terminal "npm run dev". 
 
 ## Usage
-If you know react, you can basically do anything you want. In the enviroment.js file is a function to retrieve the backend URl that is generally passed by context from the top levels of the routes. You can modify to use any API that you want or check the one i developed in Express.[right here](https://github.com/lpolverino/Waldo-backend).
+If you know react, you can basically do anything you want. In the enviroment.js file is a function to retrieve the backend URl that is generally passed by context from the top levels of the routes. You can modify to use any API that you want or check the one i developed in Express [right here](https://github.com/lpolverino/Waldo-backend).
