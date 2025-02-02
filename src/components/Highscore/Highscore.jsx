@@ -56,7 +56,7 @@ const Highscore = () => {
   useEffect(() =>{
     const getHighscores = async () => {
 
-      const url = enviroment.getBackEnd() + "/level/" + levelId + "/highscores"
+      const url = enviroment.getBackEnd() + "level/" + levelId + "/highscores"
       try{
         const response = await fetch(url)
 
