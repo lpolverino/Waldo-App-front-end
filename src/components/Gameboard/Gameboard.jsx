@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import PopUpMenu from '../PopUpMenu/PopUpMenu';
 import {Backend} from '../Level/Level';
-import { useContext, useEffect, useState} from 'react';
+import { useContext, useState} from 'react';
 import styles from "./gameboard.module.css"
 
 
@@ -12,13 +12,6 @@ const Gameboard = ({ levelImg, mouse, setMouse, setCharacterFounded, levelDimens
     x:0,
     y:0,
   })
-
-  useEffect( () => {
-    const timeoutId = setTimeout( () => {
-      setMessege(null)
-    }, 2000)
-    return () => clearTimeout(timeoutId);
-  }, [messege])
 
   const {characters, url} = useContext(Backend)
 
@@ -35,7 +28,7 @@ const Gameboard = ({ levelImg, mouse, setMouse, setCharacterFounded, levelDimens
       x:getAcutalPosition(mouse.position.x,imgActualSize.width,levelDimensions.width ),
       y:getAcutalPosition(mouse.position.y,imgActualSize.height,levelDimensions.height )
     }
-    console.log(positionInImage);
+    console.log({positionInImage});
     try{
       const response = await fetch(url,{
         method:"post",
@@ -66,18 +59,25 @@ const Gameboard = ({ levelImg, mouse, setMouse, setCharacterFounded, levelDimens
     console.log(`clicked on ${characterId}`);
     setMouse({pressed: false, intents: mouse.intents +1})
     const positionData = await sendPosition(characterId)
-    /*if (messege === null){
+    console.log(positionData.succed)
+    if (messege=== null){
       setTimeout(() =>{
         setMessege(null)
-      },3000)*/
+      },3000)
+    }
     setMessege(getResponseText(positionData.succed, characterId) )
     setCharacterFounded(characterId, positionData.succed)
   }
 
   const getAcutalPosition = (position, currentSize, originalSize) =>{
-    const currentPorcentage =  (originalSize)/currentSize
+    console.log({
+      position,
+      currentSize,
+      originalSize
+    });
+    
+    const currentPorcentage =  (originalSize) / currentSize
     return Math.round(position * (currentPorcentage))
-
   } 
 
   const handlerClick = (e) =>{
@@ -88,9 +88,6 @@ const Gameboard = ({ levelImg, mouse, setMouse, setCharacterFounded, levelDimens
       width:e.target.width,
       height:e.target.height,
     }
-
-   // console.log(`actual img size (${imgAactualWidth}; ${imgAactualHeight})`);
-   // console.log(`original img size (${levelDimensions.width};${levelDimensions.height})`);
     const mouseCordinatesInImg = {
       x:e.clientX - e.target.offsetLeft,
       y:e.clientY - e.target.offsetTop + window.scrollY

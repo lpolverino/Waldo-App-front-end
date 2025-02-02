@@ -13,23 +13,6 @@ export const Backend = createContext({
   characters:[]
 })
 
-
-const Loading = () =>{
-  return (
-    <div className={styles.level_loading}>
-      <Header></Header>
-      <div className={styles.loading}>
-        <h2>
-          Loading Level (Computer finding waldo)
-        </h2>
-        <div className={styles.grid}><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
-      </div>
-      <Footer></Footer>
-    </div>
-  ) 
-}
-
-
 const Level = () => {
 
   const { levelId } = useParams();
@@ -76,16 +59,16 @@ const Level = () => {
         const actualData = await response.json();
         console.log(actualData.level);
         setLevelData({
-          _id:actualData.level._id,
+          id:actualData.level.id,
           name:actualData.level.name,
           highscore: actualData.level.highscore,
         })
-        const levelIMageURl = await fetchImage(actualData.level.img)
+        const levelIMageURl = await fetchImage(actualData.level.url)
         setLevelImg(levelIMageURl)
-        setLevelDimensions({width:actualData.level.imgWidth, height: actualData.level.imgHeight})
+        setLevelDimensions({width:actualData.level.imgWidth, height: actualData.level.imgHeigth})
         const charactersWIthFetchedImages = await Promise.all(
-          actualData.level.characters.map(async (character) => {
-            const chararcterImgUrl = await fetchImage(character.img)
+          actualData.level.charactes.map(async (character) => {
+            const chararcterImgUrl = await fetchImage(character.url)
             return {...character, img:chararcterImgUrl, founded:false}
           })
         )
@@ -132,14 +115,13 @@ const Level = () => {
                     }>
                 </Header>
             </div>
-                <Gameboard
-                  levelImg={levelImg}
-                  mouse={mouse}
-                  setMouse={setMouse}
-                  setCharacterFounded={setCharacterFounded}
-                  levelDimensions= {levelDimensions}>
-                </Gameboard>
-        
+              <Gameboard
+                levelImg={levelImg}
+                mouse={mouse}
+                setMouse={setMouse}
+                setCharacterFounded={setCharacterFounded}
+                levelDimensions= {levelDimensions}>
+              </Gameboard>
              {finished && <EndGamePanel score={calculateDifTimeWithStart(score)}></EndGamePanel>}
              <Footer></Footer>
           </div>
@@ -149,11 +131,11 @@ const Level = () => {
 
   if(error === null){
     return (<>
-        {loading 
-          ? <Loading></Loading>
-          :createGame()
-        }
-      </>
+      {loading
+        ?<h2>Loading</h2>
+        :createGame()
+      }
+    </>
     )
   }else{
     return <ErrorPage></ErrorPage>

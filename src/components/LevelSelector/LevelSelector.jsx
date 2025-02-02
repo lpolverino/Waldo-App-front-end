@@ -9,11 +9,11 @@ const createDisplayer =  (levels) => {
   return  (
   <ul className={styles.card_displayer}>
     {levels.map(level =>
-        <li key={level._id}>
+        <li key={level.id}>
           <div className={styles.card}>
-            <Link to={"level/"+level._id}>
+            <Link to={"level/"+level.id}>
               <h3>{level.name}</h3>
-              <img src={level.img}/>
+              <img src={level.url}/>
             </Link>
           </div>
         </li>
@@ -29,18 +29,6 @@ const createErrorMessage = (error) =>{
       <p>{error}</p>
     </div>
   )
-}
-
-const LoadPanel = () =>{
-
-  return (
-    <div className={styles.loading}>
-      <h2>
-        Getting Levels
-      </h2>
-      <div className={styles.grid}><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
-    </div>
-  ) 
 }
 
 const LevelSelector = ({url}) => {
@@ -78,10 +66,7 @@ const LevelSelector = ({url}) => {
   return (
     <div>
       {error && createErrorMessage(error)}
-      {loading
-        ? <LoadPanel></LoadPanel>
-        :createDisplayer(levels)
-      }
+     {!loading && createDisplayer(levels)}
     </div>
   )
 }
